@@ -29,3 +29,18 @@ describe('OLSKMomentPerceptionDay', function test_OLSKMomentPerceptionDay() {
 	});
 
 });
+
+describe('OLSKMomentPerceptionDate', function test_OLSKMomentPerceptionDate() {
+
+	it('throws if not valid', function () {
+		throws(function () {
+			mod.OLSKMomentPerceptionDate(new Date('alfa'));
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('returns date', function () {
+		const item = new Date();
+		deepEqual(mod.OLSKMomentPerceptionDate(item), new Date(mod.OLSKMomentPerceptionDay(item) + `T04:00:00-${ offset }:00`));
+	});
+
+});
