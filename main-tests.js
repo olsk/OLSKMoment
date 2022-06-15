@@ -6,6 +6,15 @@ const offset = (function (inputData) {
 	return inputData < 10 ? `0${ inputData }` : inputData;
 })((new Date()).getTimezoneOffset() / 60);
 
+describe('OLSKMomentStringOffset', function test_OLSKMomentStringOffset() {
+
+	it('returns offset in current timezone', function () {
+		const item = (new Date()).getTimezoneOffset() / 60;
+		deepEqual(mod.OLSKMomentStringOffset(), (item < 0 ? '+' : '-') + String(Math.abs(item)).padStart(2, '0'));
+	});
+
+});
+
 describe('OLSKMomentPerceptionDay', function test_OLSKMomentPerceptionDay() {
 
 	it('throws if not valid', function () {

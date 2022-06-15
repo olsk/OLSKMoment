@@ -1,5 +1,10 @@
 const mod = {
 
+	OLSKMomentStringOffset () {
+		const item = (new Date()).getTimezoneOffset() / 60;
+		return (item < 0 ? '+' : '-') + String(Math.abs(item)).padStart(2, '0')
+	},
+
 	OLSKMomentPerceptionDay (inputData) {
 		if (!(inputData instanceof Date) || Number.isNaN(inputData.getTime())) {
 			throw new Error('OLSKErrorInputNotValid');
