@@ -14,8 +14,7 @@ const mod = {
 	},
 
 	OLSKMomentPerceptionDate (inputData) {
-		const offset = inputData.getTimezoneOffset() / 60;
-		return new Date(mod.OLSKMomentPerceptionDay(inputData) + `T04:00:00${ offset < 0 ? '+' : '-' }${ Math.abs(offset).toString().padStart(2, '0') }:00`);
+		return new Date(mod.OLSKMomentPerceptionDay(inputData) + `T04:00:00${ mod.OLSKMomentStringOffset() }:00`);
 	},
 
 };

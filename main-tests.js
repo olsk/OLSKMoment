@@ -2,10 +2,6 @@ const { throws, deepEqual } = require('assert');
 
 const mod = require('./main.js');
 
-const offset = (function (inputData) {
-	return inputData < 10 ? `0${ inputData }` : inputData;
-})((new Date()).getTimezoneOffset() / 60);
-
 describe('OLSKMomentStringOffset', function test_OLSKMomentStringOffset() {
 
 	it('returns offset in current timezone', function () {
@@ -24,16 +20,16 @@ describe('OLSKMomentPerceptionDay', function test_OLSKMomentPerceptionDay() {
 	});
 
 	it('returns day in current timezone', function () {
-		deepEqual(mod.OLSKMomentPerceptionDay(new Date(`2020-05-02T12:00:00-${ offset }:00`)), '2020-05-02');
+		deepEqual(mod.OLSKMomentPerceptionDay(new Date(`2020-05-02T12:00:00${ mod.OLSKMomentStringOffset() }:00`)), '2020-05-02');
 	});
 
 	it('previous day if before 4am', function () {
-		const date = new Date(`2020-05-02T03:59:00-${ offset }:00`);
+		const date = new Date(`2020-05-02T03:59:00${ mod.OLSKMomentStringOffset() }:00`);
 		deepEqual(mod.OLSKMomentPerceptionDay(date), '2020-05-01');
 	});
 
 	it('same day if 4am', function () {
-		const date = new Date(`2020-05-02T04:00:00-${ offset }:00`);
+		const date = new Date(`2020-05-02T04:00:00${ mod.OLSKMomentStringOffset() }:00`);
 		deepEqual(mod.OLSKMomentPerceptionDay(date), '2020-05-02');
 	});
 
@@ -49,7 +45,7 @@ describe('OLSKMomentPerceptionDate', function test_OLSKMomentPerceptionDate() {
 
 	it('returns date', function () {
 		const item = new Date();
-		deepEqual(mod.OLSKMomentPerceptionDate(item), new Date(mod.OLSKMomentPerceptionDay(item) + `T04:00:00-${ offset }:00`));
+		deepEqual(mod.OLSKMomentPerceptionDate(item), new Date(mod.OLSKMomentPerceptionDay(item) + `T04:00:00${ mod.OLSKMomentStringOffset() }:00`));
 	});
 
 });
